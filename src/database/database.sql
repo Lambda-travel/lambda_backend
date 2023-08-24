@@ -4,7 +4,7 @@ CREATE TABLE users(
     last_name VARCHAR(255) NOT NULL,
     user_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
-    hashed_password INT NOT NULL,
+    hashed_password VARCHAR(255) NOT NULL,
     profile_image_url TEXT
 );
 
