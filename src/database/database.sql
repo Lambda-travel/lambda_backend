@@ -5,7 +5,7 @@ CREATE TABLE users(
     user_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     hashed_password INT NOT NULL,
-    profile_image_url TEXT,
+    profile_image_url TEXT
 );
 
 CREATE TABLE trips(
@@ -22,13 +22,13 @@ CREATE TABLE destination(
     id INT PRIMARY KEY AUTO_INCREMENT,
     place_to_visit VARCHAR(255) NOT NULL,
     location VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL,
+    description TEXT NOT NULL
 );
 
 CREATE TABLE destination_images(
     destination_id INT NOT NULL,
     image_url TEXT NOT NULL,
-    FOREIGN KEY (destination_id) REFERENCES destination(id),
+    FOREIGN KEY (destination_id) REFERENCES destination(id)
 );
 
 CREATE TABLE articles(
