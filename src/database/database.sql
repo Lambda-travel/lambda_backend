@@ -43,7 +43,7 @@ CREATE TABLE place_to_visit(
     name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     trip_id INT NOT NULL,
-    FOREIGN KEY (trip_id) REFERENCES trips(id),
+    FOREIGN KEY (trip_id) REFERENCES trips(id)
 );
 
 CREATE TABLE travel_mates(
