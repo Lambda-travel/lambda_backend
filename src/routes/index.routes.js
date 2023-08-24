@@ -1,9 +1,7 @@
-
+// import routes here
 
 const setupRoutes = (server) => {
-    server.use("/",()=>{
-        console.log("hello")
-    })
+    // server.use("<endpoint>",<routes>)
 }
 
 
