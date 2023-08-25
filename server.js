@@ -8,7 +8,6 @@ server.use(express.json())
 
 const setupRoutes = require("./src/routes/index.routes")
 
-
 setupRoutes(server)
 
 
