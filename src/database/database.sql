@@ -18,17 +18,26 @@ CREATE TABLE trips(
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-CREATE TABLE destination(
+CREATE TABLE number_days(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    day VARCHAR(255) NOT NULL,
+    trip_id INT NOT NULL,
+    FOREIGN KEY (trip_id) REFERENCES trips(id)
+);
+
+CREATE TABLE destinations(
     id INT PRIMARY KEY AUTO_INCREMENT,
     place_to_visit VARCHAR(255) NOT NULL,
     location VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL
+    description TEXT NOT NULL,
+    day_id INT NOT NULL,
+    FOREIGN KEY (day_id) REFERENCES number_days(id)
 );
 
 CREATE TABLE destination_images(
     destination_id INT NOT NULL,
     image_url TEXT NOT NULL,
-    FOREIGN KEY (destination_id) REFERENCES destination(id)
+    FOREIGN KEY (destination_id) REFERENCES destinations(id)
 );
 
 CREATE TABLE articles(
@@ -38,7 +47,7 @@ CREATE TABLE articles(
     image_url TEXT NOT NULL
 );
 
-CREATE TABLE place_to_visit(
+CREATE TABLE places_to_visit(
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,

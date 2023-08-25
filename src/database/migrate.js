@@ -15,11 +15,14 @@ const migrate = async () => {
   await connection.query(`use ${DB_NAME}`);
   const sql = fs.readFileSync("./src/database/database.sql", "utf8");
   await connection.query(sql);
+  const dummyData = fs.readFileSync("./src/database/dummyData.sql", "utf8");
+  await connection.query(dummyData);
   connection.end();
 };
 
 try {
   migrate();
+  console.log("DB reset completed!");
 } catch (err) {
   console.error(err);
 }
