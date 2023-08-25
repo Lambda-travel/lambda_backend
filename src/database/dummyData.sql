@@ -55,14 +55,16 @@ VALUES
         '2023-08-21',
         'switzerland_trip.jpg',
         1
-    ),
-    (
-        'Japan',
-        '2023-07-10',
-        '2023-07-15',
-        'japan_trip.jpg',
-        1
-    );
+    )
+    -- ,
+    ;
+    -- (
+    --     'Japan',
+    --     '2023-07-10',
+    --     '2023-07-15',
+    --     'japan_trip.jpg',
+    --     1
+    -- );
 
 -- Insert sample trip data for user with id 2
 INSERT INTO
@@ -94,28 +96,30 @@ VALUES
         '2023-10-12',
         'kenya_trip.jpg',
         2
-    ),
-    (
-        'USA',
-        '2023-07-20',
-        '2023-07-25',
-        'usa_trip.jpg',
-        2
-    ),
-    (
-        'Canada',
-        '2023-12-01',
-        '2023-12-10',
-        'canada_trip.jpg',
-        2
-    ),
-    (
-        'India',
-        '2023-11-15',
-        '2023-11-20',
-        'india_trip.jpg',
-        2
-    );
+    )
+    -- ,
+    ;
+    -- (
+    --     'USA',
+    --     '2023-07-20',
+    --     '2023-07-25',
+    --     'usa_trip.jpg',
+    --     2
+    -- ),
+    -- (
+    --     'Canada',
+    --     '2023-12-01',
+    --     '2023-12-10',
+    --     'canada_trip.jpg',
+    --     2
+    -- ),
+    -- (
+    --     'India',
+    --     '2023-11-15',
+    --     '2023-11-20',
+    --     'india_trip.jpg',
+    --     2
+    -- );
 
 -- Function to generate date range
 CREATE FUNCTION generate_date_range(
@@ -144,26 +148,35 @@ SELECT
 SELECT
     generate_date_range('2023-08-15', '2023-08-21', 2);
 
-SELECT
-    generate_date_range('2023-07-10', '2023-07-15', 3);
+-- SELECT
+--     generate_date_range('2023-07-10', '2023-07-15', 3);
+
+-- SELECT
+--     generate_date_range('2023-08-25', '2023-08-30', 4);
+
+-- SELECT
+--     generate_date_range('2023-09-10', '2023-09-18', 5);
+
+-- SELECT
+--     generate_date_range('2023-10-05', '2023-10-12', 6);
 
 SELECT
-    generate_date_range('2023-08-25', '2023-08-30', 4);
+    generate_date_range('2023-08-25', '2023-08-30', 3);
 
 SELECT
-    generate_date_range('2023-09-10', '2023-09-18', 5);
+    generate_date_range('2023-09-10', '2023-09-18', 4);
 
 SELECT
-    generate_date_range('2023-10-05', '2023-10-12', 6);
+    generate_date_range('2023-10-05', '2023-10-12', 5);
 
-SELECT
-    generate_date_range('2023-07-20', '2023-07-25', 7);
+-- SELECT
+--     generate_date_range('2023-07-20', '2023-07-25', 7);
 
-SELECT
-    generate_date_range('2023-12-01', '2023-12-10', 8);
+-- SELECT
+--     generate_date_range('2023-12-01', '2023-12-10', 8);
 
-SELECT
-    generate_date_range('2023-11-15', '2023-11-20', 9);
+-- SELECT
+--     generate_date_range('2023-11-15', '2023-11-20', 9);
 
 -- Drop the function
 DROP FUNCTION generate_date_range;
