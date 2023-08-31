@@ -3,7 +3,6 @@ const Trip = require('../models/new-trip.model')
 
 
 const createTrip =(req, res)=>{
-    // console.log(req.body);
     Trip.createNewTrip(req.body)
     .then((results)=>{
         if(results.affectedRows > 0){

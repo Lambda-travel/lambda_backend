@@ -7,7 +7,12 @@ const getById = (id)=>{
 
 }
 
+const getAllDestinations =()=> {
+    return database.query("SELECT * FROM destinations")
+    .then(([results])=> results)
+}
 
 module.exports = {
     getById,
+    getAllDestinations
 }
