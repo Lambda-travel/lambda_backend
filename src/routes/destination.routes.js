@@ -5,8 +5,16 @@ const destinationController = require('../controller/destination.controller')
 //* /destination/id
 destinationRouter.get('/:id', destinationController.getDestinationById )
 
-// LIST OF DESTINATIONS
-destinationRouter.get('/', destinationController.getListOfDestinations )
+
+
+
+/************ CREATE DESTINATION *************/
+
+destinationRouter.post("/",destinationController.createDestination)
+
+
+
+
 
 module.exports = destinationRouter
 

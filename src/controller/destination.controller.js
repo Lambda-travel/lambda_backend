@@ -20,28 +20,29 @@ Destination.getById(id)
 }
 
 
-const getListOfDestinations =(req,res)=> {
-    Destination.getAllDestinations()
-    .then((results)=>{
-        if(results !== null && results.length > 0){
-            res.status(200).send(results)
+
+/*****************  CREATE DESTINATION  *****************/
+
+ const createDestination =(req,res)=> {
+    const body = req.body 
+
+    Destination.createDestination (body)
+    .then((result)=>{
+        if(result.affectedRows > 0 ) {
+            res.status(201).send(`Your destination has been created`)
         } else {
-            res.status(404).send(`Destination not found` )
+            res.status(403).send("Forbidden")
         }
     })
     .catch((err)=>{
         console.error(err);
         res.status(500).send('Error retrieving user data from database')
     })
-}
-
-
-
-
+ }
 
 module.exports= {
     getDestinationById,
-    getListOfDestinations
+    createDestination
 }
 
 
