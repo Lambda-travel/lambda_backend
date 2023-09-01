@@ -4,15 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "start":"node --watch server.js",
+    "dev": "nodemon server.js",
+    "migrate":"node ./src/database/migrate.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "argon2": "^0.31.0",
+    "argon2": "^0.30.3",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "fs": "^0.0.1-security",
     "mysql2": "^3.6.0"
   },
   "devDependencies": {
