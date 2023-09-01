@@ -662,7 +662,7 @@ VALUES
     (
         'Exploring the Beach Paradise',
         'Discover the breathtaking beauty of sandy beaches and crystal-clear waters. Unwind and relax in the lap of nature.',
-        'beach.jpg'
+        'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhY2h8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'
     ),
     (
         'Hiking the Majestic Mountains',
