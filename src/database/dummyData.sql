@@ -662,50 +662,50 @@ VALUES
     (
         'Exploring the Beach Paradise',
         'Discover the breathtaking beauty of sandy beaches and crystal-clear waters. Unwind and relax in the lap of nature.',
-        'beach.jpg'
+        'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhY2h8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'
     ),
     (
         'Hiking the Majestic Mountains',
         'Embark on an adventure to conquer towering peaks, witness stunning vistas, and breathe in the crisp mountain air.',
-        'mountains.jpg'
+        'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bW91bnRhaW5zfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60'
     ),
     (
         'Cultural Delights of Ancient Cities',
         'Immerse yourself in the rich history and traditions of ancient cities. Explore architectural wonders and vibrant local cultures.',
-        'city.jpg'
+        'https://images.unsplash.com/photo-1518391846015-55a9cc003b25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2940&q=80'
     ),
     (
         'Sailing the Open Seas',
         'Set sail on a journey across vast oceans. Experience the freedom of the open waters and watch mesmerizing sunsets.',
-        'sailing.jpg'
+        'https://images.unsplash.com/photo-1526761122248-c31c93f8b2b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8c2FpbGluZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60'
     ),
     (
         'Foodie Expedition Through Markets',
         'Indulge your taste buds in a culinary journey through bustling markets. Savor exotic flavors and local delicacies.',
-        'food.jpg'
+        'https://images.unsplash.com/photo-1448043552756-e747b7a2b2b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2852&q=80'
     ),
     (
         'Wildlife Safari Adventures',
         'Encounter the wild side of nature as you venture into jungles and savannas. Observe majestic creatures in their natural habitats.',
-        'safari.jpg'
+        'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c2FmYXJpfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60'
     ),
     (
         'Tranquil Retreat in Countryside',
         'Escape the hustle and bustle by retreating to serene countryside landscapes. Enjoy peace and solitude in cozy lodges.',
-        'countryside.jpg'
+        'https://images.unsplash.com/photo-1540844790881-4db304dd1831?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2832&q=80'
     ),
     (
         'Urban Exploration: Neon Nights',
         'Dive into the vibrant energy of urban life. Explore bustling streets, enjoy dazzling nightlife, and capture cityscapes.',
-        'urban.jpg'
+        'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8dXJiYW58ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'
     ),
     (
         'Thrills and Chills of Winter Escapes',
         'Embrace the winter wonderland with thrilling activities like skiing, snowboarding, and cozy evenings by the fire.',
-        'winter.jpg'
+        'https://images.unsplash.com/photo-1445543949571-ffc3e0e2f55e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2938&q=80'
     ),
     (
         'Journey to Ancient Temples',
         'Uncover the mysteries of ancient temples and religious sites. Marvel at intricate architecture and spiritual history.',
-        'temple.jpg'
+        'https://images.unsplash.com/photo-1603766806347-54cdf3745953?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHRlbXBsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60'
     );

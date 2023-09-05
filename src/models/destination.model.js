@@ -7,7 +7,16 @@ const getById = (id)=>{
 
 }
 
+/***************   CREATE DESTINATION  ********************/
+
+const createDestination =( body )=> {
+    return database.query("INSERT INTO destinations SET ?", body)
+    .then(([results])=> results)
+}
+
+
 
 module.exports = {
     getById,
+    createDestination
 }

@@ -19,8 +19,30 @@ Destination.getById(id)
         })
 }
 
+
+
+/*****************  CREATE DESTINATION  *****************/
+
+ const createDestination =(req,res)=> {
+    const body = req.body 
+
+    Destination.createDestination (body)
+    .then((result)=>{
+        if(result.affectedRows > 0 ) {
+            res.status(201).send(`Your destination has been created`)
+        } else {
+            res.status(403).send("Forbidden")
+        }
+    })
+    .catch((err)=>{
+        console.error(err);
+        res.status(500).send('Error retrieving user data from database')
+    })
+ }
+
 module.exports= {
-    getDestinationById
+    getDestinationById,
+    createDestination
 }
 
 
