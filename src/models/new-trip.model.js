@@ -7,6 +7,13 @@ const createNewTrip =(trip)=>{
         .then(([results])=> results);
 }
 
+
+const createNewTravelMateTrip =(data)=>{
+  return database.query('INSERT INTO travel_mates SET ?', data)
+      .then(([results])=> results);
+}
+
+
 const generateDateRange = async(startDate, endDate, tripId) => {
     let currentDate = new Date(startDate);
     const endDateObj = new Date(endDate);
@@ -39,5 +46,6 @@ const generateDateRange = async(startDate, endDate, tripId) => {
 module.exports={
     createNewTrip,
     generateDateRange,
-    getAllDays
+    getAllDays,
+    createNewTravelMateTrip,
 }
