@@ -28,9 +28,16 @@ const generateDateRange = async(startDate, endDate, tripId) => {
   
     return 1;
   }
+
+  /*************** GET LIST OF DAYS FROM TRIP ************************/
   
+    const getAllDays =(id)=> {
+      return database.query("SELECT * FROM number_days where trip_id=?",id)
+      .then(([result])=> result)
+    }
 
 module.exports={
     createNewTrip,
     generateDateRange,
+    getAllDays
 }

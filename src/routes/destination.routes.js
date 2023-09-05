@@ -7,7 +7,6 @@ destinationRouter.get('/:id', destinationController.getDestinationById )
 
 
 
-
 /************ CREATE DESTINATION *************/
 
 destinationRouter.post("/",destinationController.createDestination)
