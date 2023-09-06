@@ -97,6 +97,24 @@ const getTrips = (req, res) => {
 }
 
 
+/*************** GET TRIP BY ID **********************/
+
+const getInfoOfTrip =(req,res)=> {
+  const id = Number(req.params.id)
+  Trip.getInfoOfTrip(id)
+  .then((result)=> {
+    if(result !== null) {
+      res.status(200).send(result)
+    } else {
+      res.status(404).send("Not Found")
+   }
+  })
+  .catch((err) => {
+   console.error(err);
+   res.status(500).send("Error creating your new trip in the database");
+  });
+}
+
 
 /*************** GET PLACE TO VISIT **********************/
  const getPlaceToVisit =(req,res)=> {
@@ -131,11 +149,17 @@ const getPlaces = (req, res) => {
       console.error(err);
       res.status(500).send("Error retrieving places from database");
     });
+
+
+
+
+
 };
 module.exports = {
   createTrip,
   getTrips,
   getPlaces,
   getAllDays,
-  getPlaceToVisit
+  getPlaceToVisit,
+  getInfoOfTrip
 };

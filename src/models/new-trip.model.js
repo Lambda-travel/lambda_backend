@@ -43,6 +43,12 @@ const generateDateRange = async(startDate, endDate, tripId) => {
   }
 
 
+ /*************** GET INFO OF ONE TRIP BY ID ************************/
+  const getInfoOfTrip =(id)=>{
+    return database.query("SELECT * FROM trips WHERE id=?",id)
+    .then(([result])=> result)
+  }
+
 /***************** PLACE TO VISIT ***************************/
 
 const placeToVisit =(id)=>{
@@ -75,6 +81,7 @@ module.exports={
     createNewTravelMateTrip,
     getAllTrips,
     placeToVisit,
-    getPlacesToVisit
+    getPlacesToVisit,
+    getInfoOfTrip
 }
 

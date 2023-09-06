@@ -8,29 +8,25 @@ tripRouter.post("/", NewTripController.createTrip);
 // get * /trip
 //! missing token verify to get userID
 tripRouter.get("/", NewTripController.getTrips);
+
 tripRouter.get("/place", NewTripController.getPlaces);
 
-<<<<<<< HEAD
+
 /*--------- GET ALL DAYS OF TRIP-------------*/
 
 tripRouter.get('/:id',NewTripController.getAllDays)
 
 
-/*--------- GET ALL  TRIP-------------*/
+/*--------- GET TRIP INFO BY ID ------------*/
 
-tripRouter.get('/',NewTripController.getAllTrips)
+tripRouter.get('/overview/:id',NewTripController.getInfoOfTrip)
 
-/*--------- GET TRIP BY ID-------------*/
-
-tripRouter.get('/overview/:id',NewTripController.getTripById)
-
-
+/*--------- GET PLACE INFO BY TRIP_ID ------------*/
 
 tripRouter.get('/overview/:id',NewTripController.getPlaceToVisit)
 
 
 
 module.exports= tripRouter
-=======
-module.exports = tripRouter;
->>>>>>> c4bad10aec48745e68374745e19800f22acf8b4a
+
+
