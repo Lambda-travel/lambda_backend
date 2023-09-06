@@ -43,9 +43,33 @@ const generateDateRange = async(startDate, endDate, tripId) => {
       .then(([result])=> result)
     }
 
+/***************** GET LIST OF TRIPS ***************************/
+const getAllTrips=(id)=>{
+  return database.query("SELECT * FROM trips WHERE user_id=?",id)
+  .then(([result])=> result)
+}
+
+/***************** GET INFO OF TRIP BY ID ***************************/
+
+const getTripById =(id)=> {
+  return database.query("select * from trips where user_id= ?",id)
+  .then(([result])=> result)
+
+}
+
+/***************** PLACE TO VISIT ***************************/
+
+const placeToVisit =(id)=>{
+  return database.query("SELECT name,description FROM places_to_visit WHERE trip_id=?",id)
+  .then(([result])=> result)
+}
+
 module.exports={
     createNewTrip,
     generateDateRange,
     getAllDays,
     createNewTravelMateTrip,
+    getAllTrips,
+    getTripById,
+    placeToVisit
 }

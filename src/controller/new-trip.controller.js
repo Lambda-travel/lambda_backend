@@ -71,7 +71,63 @@ const getAllDays =(req,res)=> {
   });
 }
 
+/*************** GET ALL TRIPS **********************/
+
+const getAllTrips =(req,res)=> {
+  const id = 1
+    Trip.getAllTrips(id)
+    .then((result)=>{
+      if(result !== null) {
+        res.status(200).send(result)
+      } else {
+        res.status(404).send("Not Found")
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error creating your new trip in the database");
+    });
+}
+
+const getTripById =(req,res)=> {
+
+  const id = Number(req.params.id)
+  Trip.getTripById(id)
+  .then((result)=> {
+    if(result !== null) {
+      res.status(200).send(result)
+    } else {
+      res.status(404).send("Not Found")
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error creating your new trip in the database");
+  });
+
+}
+
+/*************** GET PLACE TO VISIT **********************/
+ const getPlaceToVisit =(req,res)=> {
+   const id = Number(req.params.id)
+   Trip.placeToVisit(id)
+   .then((result)=> {
+     if(result !== null) {
+       res.status(200).send(result)
+     } else {
+       res.status(404).send("Not Found")
+    }
+   })
+   .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error creating your new trip in the database");
+   });
+ }
+
 module.exports = {
   createTrip,
-  getAllDays
+  getAllDays,
+  getAllTrips,
+  getTripById,
+  getPlaceToVisit
 };
