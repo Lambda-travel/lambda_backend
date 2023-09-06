@@ -23,7 +23,7 @@ tripRouter.get('/overview/:id',NewTripController.getInfoOfTrip)
 
 /*--------- GET PLACE INFO BY TRIP_ID ------------*/
 
-tripRouter.get('/overview/:id',NewTripController.getPlaceToVisit)
+tripRouter.get('/place/:id',NewTripController.getPlaceToVisit)
 
 
 

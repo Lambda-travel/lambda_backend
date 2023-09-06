@@ -52,8 +52,8 @@ const generateDateRange = async(startDate, endDate, tripId) => {
 /***************** PLACE TO VISIT ***************************/
 
 const placeToVisit =(id)=>{
-return database.query("SELECT name,description FROM places_to_visit WHERE trip_id=?",id)
-.then(([result])=> result)
+return database.query("SELECT * FROM places_to_visit WHERE trip_id=?",id)
+.then(([result])=> result )
 }
 
 
