@@ -6,5 +6,14 @@ const destinationController = require('../controller/destination.controller')
 destinationRouter.get('/:id', destinationController.getDestinationById )
 
 
+
+/************ CREATE DESTINATION *************/
+
+destinationRouter.post("/",destinationController.createDestination)
+
+
+
+
+
 module.exports = destinationRouter
 

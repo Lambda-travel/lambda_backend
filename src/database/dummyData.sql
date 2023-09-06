@@ -46,14 +46,14 @@ VALUES
         'Australia',
         '2023-09-01',
         '2023-09-07',
-        'australia_trip.jpg',
+        'https://images.pexels.com/photos/995764/pexels-photo-995764.jpeg?auto=compress&cs=tinysrgb&w=1600',
         1
     ),
     (
         'Switzerland',
         '2023-08-15',
         '2023-08-21',
-        'switzerland_trip.jpg',
+        'https://images.pexels.com/photos/1291766/pexels-photo-1291766.jpeg?auto=compress&cs=tinysrgb&w=1600',
         1
     )
     -- ,
@@ -80,21 +80,21 @@ VALUES
         'Greece',
         '2023-08-25',
         '2023-08-30',
-        'greece_trip.jpg',
+        'https://images.pexels.com/photos/164336/pexels-photo-164336.jpeg?auto=compress&cs=tinysrgb&w=1600',
         2
     ),
     (
         'Italy',
         '2023-09-10',
         '2023-09-18',
-        'italy_trip.jpg',
+        'https://images.pexels.com/photos/531602/pexels-photo-531602.jpeg?auto=compress&cs=tinysrgb&w=1600',
         2
     ),
     (
         'Kenya',
         '2023-10-05',
         '2023-10-12',
-        'kenya_trip.jpg',
+        'https://images.pexels.com/photos/9833515/pexels-photo-9833515.jpeg?auto=compress&cs=tinysrgb&w=1600',
         2
     )
     -- ,

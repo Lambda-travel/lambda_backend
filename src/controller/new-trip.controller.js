@@ -55,6 +55,29 @@ const createTrip = (req, res) => {
     });
 };
 
+
+
+/***************** GET LIST OF DAYS FROM TRIP *********************/
+
+const getAllDays =(req,res)=> {
+  const id = Number(req.params.id)
+  Trip.getAllDays(id)
+  .then((result)=>{
+    if(result !== null && result.length > 0){
+      res.status(200).send(result)
+    } else {
+      res.status(404).send("Not Found!")
+    }
+    
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error creating your new trip in the database");
+  });
+}
+
+/*************** GET ALL TRIPS **********************/
+
 const getTrips = (req, res) => {
   //! this ID should come from the TOKEN
   const id = 1;
@@ -69,9 +92,47 @@ const getTrips = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send("Error retrieving trips from database");
+      res.status(500).send("Error creating your new trip in the database");
     });
-};
+}
+
+
+/*************** GET TRIP BY ID **********************/
+
+const getInfoOfTrip =(req,res)=> {
+  const id = Number(req.params.id)
+  Trip.getInfoOfTrip(id)
+  .then((result)=> {
+    if(result !== null) {
+      res.status(200).send(result)
+    } else {
+      res.status(404).send("Not Found")
+   }
+  })
+  .catch((err) => {
+   console.error(err);
+   res.status(500).send("Error creating your new trip in the database");
+  });
+}
+
+
+/*************** GET PLACE TO VISIT **********************/
+ const getPlaceToVisit =(req,res)=> {
+   const id = Number(req.params.id)
+   Trip.placeToVisit(id)
+   .then((result)=> {
+     if(result !== null) {
+       res.status(200).send(result)
+     } else {
+       res.status(404).send("Not Found")
+    }
+   })
+   .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error creating your new trip in the database");
+   });
+ }
+
 
 const getPlaces = (req, res) => {
   //! this ID should come from the TOKEN
@@ -88,9 +149,17 @@ const getPlaces = (req, res) => {
       console.error(err);
       res.status(500).send("Error retrieving places from database");
     });
+
+
+
+
+
 };
 module.exports = {
   createTrip,
   getTrips,
   getPlaces,
+  getAllDays,
+  getPlaceToVisit,
+  getInfoOfTrip
 };
