@@ -1,24 +1,48 @@
 const Trip = require("../models/new-trip.model");
 
 const createTrip = (req, res) => {
-  // console.log(req.body);
   Trip.createNewTrip(req.body)
     .then(async (results) => {
       if (results.affectedRows > 0) {
-        const { start_date, end_date } = req.body;
+        const { start_date, end_date, user_id } = req.body;
         const tripId = results.insertId;
 
         try {
           await Trip.generateDateRange(start_date, end_date, tripId);
+
           res.status(201).send("New trip created! Date range also generated!");
+
+          let data = {
+            user_id: user_id,
+            trip_id: tripId,
+          };
+          Trip.createNewTravelMateTrip(data)
+            .then((results) => {
+              if (results.affectedRows > 0) {
+                res
+                  .status(201)
+                  .send("New trip created! Date range also generated!");
+              } else {
+                res
+                  .status(422)
+                  .send(
+                    "Sorry we were not able to process the creation of your travel mate trip. Please try again."
+                  );
+              }
+            })
+            .catch((err) => {
+              res.status(500).json({
+                error: "Error generating date range",
+                message: err.message,
+              });
+            });
+
         } catch (error) {
           res.status(500).json({
             error: "Error generating date range",
             message: error.message,
           });
         }
-
-        // res.status(201).send("New trip created!");
       } else {
         res
           .status(422)

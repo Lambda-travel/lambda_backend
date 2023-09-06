@@ -8,6 +8,13 @@ const getById = (id)=>{
         .then(([results])=> results)
 }
 
+const verifyByEmail=(value)=>{
+    return database.query('SELECT * FROM users WHERE email=? OR user_name=?', [value, value])
+        .then(([results])=> results)
+
+}
+
 module.exports = {
     getById,
+    verifyByEmail,
 }
