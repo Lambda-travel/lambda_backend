@@ -14,7 +14,18 @@ const verifyByEmail=(value)=>{
 
 }
 
+const createUser=(user)=>{
+    return database.query('INSERT INTO users SET ?', user )
+    .then(([results])=>results)
+}
+
+const verifyRegisterEmail=(email)=>{
+    return database.query('SELECT email FROM users WHERE email=?', email)
+        .then(([results])=> results)
+}
 module.exports = {
     getById,
     verifyByEmail,
+    createUser,
+    verifyRegisterEmail,
 }
