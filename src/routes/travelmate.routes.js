@@ -6,5 +6,6 @@ const {verifyEmailOrUser, verifyTheInvitedUser}= require('../middlewares/travelm
 //* /travelmate
 travelmateRouter.post('/',verifyEmailOrUser, verifyTheInvitedUser, TravelmateController.inviteTravelmate)
 
+// getUserName,
 
 module.exports = travelmateRouter

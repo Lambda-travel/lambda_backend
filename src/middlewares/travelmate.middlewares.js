@@ -3,6 +3,7 @@ const TravelMate = require("../models/travelmate.model");
 
 const verifyEmailOrUser = (req, res, next) => {
   const { value } = req.body;
+  console.log(req.body);
   Users.verifyByEmail(value)
     .then((results) => {
       if (results[0] !== undefined) {
@@ -31,7 +32,7 @@ const verifyTheInvitedUser = (req, res, next) => {
         res
           .status(403)
           .send(
-            ` ${req.travelMate.email} is already been invited to this trip.`
+            ` ${req.travelMate.email} was already been invited to this trip.`
           );
       } else {
         next();
@@ -42,6 +43,12 @@ const verifyTheInvitedUser = (req, res, next) => {
       res.status(500).send("Error verifying travel mate in DB");
     });
 };
+
+//!falta o user name para colocar no email
+// const getUserName =(req, res, next)=>{
+//   const { value } = req.body;
+//   Users.verifyByEmail(value)
+// }
 
 module.exports = {
   verifyEmailOrUser,
