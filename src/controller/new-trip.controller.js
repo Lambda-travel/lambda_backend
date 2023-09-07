@@ -10,8 +10,6 @@ const createTrip = (req, res) => {
         try {
           await Trip.generateDateRange(start_date, end_date, tripId);
 
-          res.status(201).send("New trip created! Date range also generated!");
-
           let data = {
             user_id: user_id,
             trip_id: tripId,

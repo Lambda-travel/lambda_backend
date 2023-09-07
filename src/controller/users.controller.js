@@ -18,6 +18,25 @@ const getUserById=(req, res)=>{
     })
 }
 
+const createNewUser=(req, res)=>{
+        
+        Users.createUser(req.body)
+        .then(results => {
+            if(results.affectedRows>0){
+                res.status(201).send('The user has been created successfully')
+            }else {
+               res.status(422).send('The server was unable to process the creation of the new user') 
+            }
+        })
+        .catch((error)=>{
+            console.error(error)
+            res.status(500).send('Error creating the new user')
+        })
+}
+
+
+
 module.exports = { 
     getUserById,
+    createNewUser,
 }

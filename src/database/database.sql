@@ -2,7 +2,7 @@ CREATE TABLE users(
     id INT PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
-    user_name VARCHAR(255) NOT NULL,
+    user_name VARCHAR(255) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
     hashed_password VARCHAR(255) NOT NULL,
     profile_image_url TEXT

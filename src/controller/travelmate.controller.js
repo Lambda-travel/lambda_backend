@@ -9,11 +9,11 @@ const inviteTravelmate = (req, res) => {
     trip_id: trip_id,
     user_id: id,
   };
-  const {user_name}= req.travelMate;
+  const {user_name, email}= req.travelMate;
   console.log(req.travelMate);
 
   let subject="Invite for a new trip"
-  inviteTravelmateSendEmail(user_name, subject)
+  inviteTravelmateSendEmail(user_name, email, subject)
   //! send EMAIL message
 
   Trip.createNewTravelMateTrip(data)
