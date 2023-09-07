@@ -1,4 +1,6 @@
 const Trip = require("../models/new-trip.model");
+const {inviteTravelmateSendEmail} = require('../helpers/sendEmail')
+
 
 const inviteTravelmate = (req, res) => {
   const { id } = req.travelMate;
@@ -7,7 +9,11 @@ const inviteTravelmate = (req, res) => {
     trip_id: trip_id,
     user_id: id,
   };
+  const {user_name}= req.travelMate;
+  console.log(req.travelMate);
 
+  let subject="Invite for a new trip"
+  inviteTravelmateSendEmail(user_name, subject)
   //! send EMAIL message
 
   Trip.createNewTravelMateTrip(data)

@@ -21,7 +21,7 @@ const createTrip = (req, res) => {
               if (results.affectedRows > 0) {
                 res
                   .status(201)
-                  .send("New trip created! Date range also generated!");
+                  .json({message:"New trip created! Date range also generated!", tripId: tripId});
               } else {
                 res
                   .status(422)
