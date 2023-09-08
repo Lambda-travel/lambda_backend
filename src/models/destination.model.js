@@ -1,8 +1,8 @@
 const database = require('../database/database.config')
 
-const getById = (id)=>{
+const getById = (id)=> {
 
-    return database.query('SELECT * FROM destinations WHERE id=? ', id)
+    return database.query('SELECT * FROM destinations WHERE day_id=? ', id)
         .then(([results])=>results) //*console.log the results first to check
 
 }
@@ -10,27 +10,27 @@ const getById = (id)=>{
 /************* DESTINATION DETAILS ***************************/
 
 
-const destinationDetail = (id)=>{
-    return database.query('select * from destinations INNER JOIN destination_images ON destinations.id = destination_images.destination_id where day_id=? ', id)
+const destinationDetail = (id)=> {
+    return database.query('select * from destinations INNER JOIN destination_images ON destinations.id = destination_images.destination_id where destination_id=? ', id)
         .then(([results])=>results) 
 
+}
+
+
+/***************   CREATE DESTINATION  ********************/
+
+const createDestination =( place_to_visit,location,description,id )=> {
+    return database.query(`INSERT INTO destinations (place_to_visit,location,description,day_id) VALUES ('${place_to_visit}','${location}','${description}',${id})`)
+    .then(([results])=> results)
 }
 /************* DESTINATION IMAGES ***************************/
 
 
-const destinationImages = (id)=>{
-    return database.query('SELECT image_url FROM destination_images WHERE destination_id=?', id)
+const destinationImages = (image,id)=>{
+    return database.query(`INSERT INTO destination_images (destination_id,image_url) VALUES ('${image}','${id}')`)
         .then(([results])=>results) 
 
 }
-
-/***************   CREATE DESTINATION  ********************/
-
-const createDestination =( body )=> {
-    return database.query("INSERT INTO destination SET ?", body)
-    .then(([results])=> results)
-}
-
 
 
 
