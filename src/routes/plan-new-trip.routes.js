@@ -21,6 +21,7 @@ tripRouter.get('/:id',NewTripController.getAllDays)
 
 tripRouter.get('/overview/:id',NewTripController.getInfoOfTrip)
 
+
 /*--------- GET PLACE INFO BY TRIP_ID ------------*/
 
 tripRouter.get('/place/:id',NewTripController.getPlaceToVisit)
@@ -28,6 +29,10 @@ tripRouter.get('/place/:id',NewTripController.getPlaceToVisit)
 /*--------- CREATE A PLACE TO VISIT ------------*/
 
 tripRouter.post('/place/:id',NewTripController.createPlaceToVisit)
+
+/*---------» EDIT TRIP INFO «------------*/
+
+tripRouter.put('/edit/:id',NewTripController.editTrip)
 
 
 

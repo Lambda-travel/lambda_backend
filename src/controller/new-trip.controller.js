@@ -53,7 +53,24 @@ const createTrip = (req, res) => {
     });
 };
 
+/**************  EDIT TRIP **************************/
 
+const editTrip =(req,res)=>{
+  const trip_id = Number(req.params.id)
+  const {body} = req
+  Trip.editTrip(body,trip_id)
+  .then((result)=>{
+    if(result.changedRows > 0){
+      res.status(200).send("Trip updated successfully")
+    }else {
+      res.status(404).send("trip not found")
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error update your new trip in the database");
+  });
+}
 
 /***************** GET LIST OF DAYS FROM TRIP *********************/
 
@@ -172,6 +189,9 @@ const getPlaces = (req, res) => {
 }
 
 
+
+
+
 module.exports = {
   createTrip,
   getTrips,
@@ -179,5 +199,6 @@ module.exports = {
   getAllDays,
   getPlaceToVisit,
   getInfoOfTrip,
-  createPlaceToVisit
+  createPlaceToVisit,
+  editTrip
 };

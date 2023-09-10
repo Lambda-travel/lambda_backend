@@ -35,6 +35,16 @@ const generateDateRange = async(startDate, endDate, tripId) => {
 
   return 1;
 };
+
+/********************** EDIT TRIP **********************************/
+
+const editTrip =(body,trip_id)=>{
+  return database.query("UPDATE trips SET ? WHERE id=?",[body,trip_id])
+  .then(([result])=>result)
+
+}
+
+
   /*************** GET LIST OF DAYS FROM TRIP ************************/
   
   const getAllDays =(id)=> {
@@ -59,7 +69,7 @@ return database.query("SELECT * FROM places_to_visit WHERE trip_id=?",id)
 
 const getAllTrips = (id) => {
   return database
-    .query(" SELECT * FROM trips WHERE user_id = ?", id)
+    .query(" SELECT * FROM trips WHERE user_id =?", id)
     .then(([results]) => results);
 };
 
@@ -90,6 +100,7 @@ module.exports={
     placeToVisit,
     getPlacesToVisit,
     getInfoOfTrip,
-    createPlaceToVisit
+    createPlaceToVisit,
+    editTrip
 }
 
