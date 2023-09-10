@@ -25,6 +25,10 @@ tripRouter.get('/overview/:id',NewTripController.getInfoOfTrip)
 
 tripRouter.get('/place/:id',NewTripController.getPlaceToVisit)
 
+/*--------- CREATE A PLACE TO VISIT ------------*/
+
+tripRouter.post('/place/:id',NewTripController.createPlaceToVisit)
+
 
 
 module.exports= tripRouter

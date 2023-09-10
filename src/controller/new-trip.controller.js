@@ -115,6 +115,7 @@ const getInfoOfTrip =(req,res)=> {
 
 
 /*************** GET PLACE TO VISIT **********************/
+
  const getPlaceToVisit =(req,res)=> {
    const id = Number(req.params.id)
    Trip.placeToVisit(id)
@@ -148,16 +149,35 @@ const getPlaces = (req, res) => {
       res.status(500).send("Error retrieving places from database");
     });
 
+  };
 
 
+/******************** CREATE PLACE TO VISIT ************************************/
+
+  function createPlaceToVisit (req,res) {
+  const {name,description} = req.body
+  const tripID = Number(req.params.id)
+  Trip.createPlaceToVisit(name,description,tripID)
+  .then((createPlace)=> {
+    if(createPlace.affectedRows > 0){
+      res.status(201).send("Place to visit Created")
+    }else {
+      res.status(422).send("Sorry you miss any information");
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error retrieving places from database");
+  });
+}
 
 
-};
 module.exports = {
   createTrip,
   getTrips,
   getPlaces,
   getAllDays,
   getPlaceToVisit,
-  getInfoOfTrip
+  getInfoOfTrip,
+  createPlaceToVisit
 };

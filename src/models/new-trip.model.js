@@ -73,6 +73,13 @@ const getPlacesToVisit = (id) => {
 };
 
 
+/*************** CREATE PLACE TO VISIT ***************/
+
+const createPlaceToVisit =(name,description,tripID)=>{
+  return database.query(`INSERT INTO places_to_visit (name,description,trip_id) VALUES ('${name}','${description}','${tripID}')`)
+  .then(([result])=>result)
+}
+
 
 module.exports={
     createNewTrip,
@@ -82,6 +89,7 @@ module.exports={
     getAllTrips,
     placeToVisit,
     getPlacesToVisit,
-    getInfoOfTrip
+    getInfoOfTrip,
+    createPlaceToVisit
 }
 
