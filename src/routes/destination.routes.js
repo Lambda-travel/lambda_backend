@@ -18,6 +18,5 @@ destinationRouter.post("/:id",destinationController.createDestination)
 
 
 
-
 module.exports = destinationRouter
 
