@@ -1,4 +1,8 @@
 const Users = require('../models/users.model')
+const jwt = require('jsonwebtoken');
+const { use } = require('../routes/users.routes');
+const e = require('express');
+require('dotenv').config()
 
 
 const getUserById=(req, res)=>{
@@ -35,8 +39,12 @@ const createNewUser=(req, res)=>{
 }
 
 const login=(req, res)=>{
+    // const{id, email }= req.user;
+
     if(req.user !== null && Object.keys(req.user).length>0){
-    res.status(200).send(req.user)
+        // const token = jwt.sign({userId:id, email:email, exp: Math.floor((Date.now() + 1000 * 60 * 60 * 24 * 90) / 1000) },process.env.PRIVATE_KEY)
+        // res.status(200).send({message: 'Success', token: token})
+        res.status(200).send(req.user)
     }else {
         res.status(404).send('Invalid credentials')
     }
