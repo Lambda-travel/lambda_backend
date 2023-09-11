@@ -36,7 +36,7 @@ const hashPassword=(req, res, next)=>{
     })
 }
 
-const verifyEmailExists=(req, res, next)=>{
+const verifyEmailToRegisterUser=(req, res, next)=>{
   Users.verifyRegisterEmail(req.body.email)
   .then(results =>{
     if(results!== null && results.length>0){
@@ -45,6 +45,56 @@ const verifyEmailExists=(req, res, next)=>{
       next()
     }
   })
+  .catch((error)=>{
+    console.error(error)
+    res.status(500).send('Error retrieving data from the database')
+  });
+};
+
+const verifyEmail=(req, res, next)=>{
+  Users.verifyRegisterEmail(req.body.email)
+  .then(results =>{
+    if(results!== null && results.length>0){
+      next()
+    }else {
+      res.status(401).send('This email is not registered, please create an account first')
+    }
+  })
+  .catch((error)=>{
+    console.error(error)
+    res.status(500).send('Error retrieving data from the database')
+  });
+};
+
+const verifyPassword=(req, res, next)=>{
+  //*get the user hashed password
+  Users.findUserToLogin(req.body.email)
+      .then((user)=>{
+        if(user !== null && user.length>0){
+          argon2.verify(user[0].hashed_password, req.body.password )
+              .then((isVerified)=>{
+                if(isVerified){
+                  delete user[0].hashed_password
+                  req.user = user[0]
+                  next()
+                }else{
+                  res.status(401).send('Invalid password')
+                }
+              })
+              .catch((error)=>{
+                console.error(error)
+                res.status(500).send('Error verifying the password')
+              });
+
+        }else{
+          res.status(404).send('User not found')
+        }
+      })
+      .catch((error)=>{
+        console.error(error)
+        res.status(500).send('Error retrieving user from database')
+      });
+
 }
 
 
@@ -52,5 +102,7 @@ module.exports = {
   verifyEmailOrUser,
   verifyUser,
   hashPassword,
-  verifyEmailExists,
+  verifyEmailToRegisterUser,
+  verifyEmail,
+  verifyPassword
 };
