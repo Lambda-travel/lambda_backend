@@ -11,8 +11,8 @@ const getById = (id)=> {
 
 
 const destinationDetail = (id)=> {
-    return database.query('select * from destinations INNER JOIN destination_images ON destinations.id = destination_images.destination_id where destination_id=? ', id)
-        .then(([results])=>results) 
+    return database.query('select * from destinations LEFT JOIN destination_images ON destinations.id = destination_images.destination_id where day_id=? ', id)
+        .then(([results])=> results) 
 
 }
 

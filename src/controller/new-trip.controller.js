@@ -53,7 +53,24 @@ const createTrip = (req, res) => {
     });
 };
 
+/**************  EDIT TRIP **************************/
 
+const editTrip =(req,res)=>{
+  const trip_id = Number(req.params.id)
+  const {body} = req
+  Trip.editTrip(body,trip_id)
+  .then((result)=>{
+    if(result.changedRows > 0){
+      res.status(200).send("Trip updated successfully")
+    }else {
+      res.status(404).send("trip not found")
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error update your new trip in the database");
+  });
+}
 
 /***************** GET LIST OF DAYS FROM TRIP *********************/
 
@@ -115,6 +132,7 @@ const getInfoOfTrip =(req,res)=> {
 
 
 /*************** GET PLACE TO VISIT **********************/
+
  const getPlaceToVisit =(req,res)=> {
    const id = Number(req.params.id)
    Trip.placeToVisit(id)
@@ -148,16 +166,39 @@ const getPlaces = (req, res) => {
       res.status(500).send("Error retrieving places from database");
     });
 
+  };
+
+
+/******************** CREATE PLACE TO VISIT ************************************/
+
+  function createPlaceToVisit (req,res) {
+  const {name,description} = req.body
+  const tripID = Number(req.params.id)
+  Trip.createPlaceToVisit(name,description,tripID)
+  .then((createPlace)=> {
+    if(createPlace.affectedRows > 0){
+      res.status(201).send("Place to visit Created")
+    }else {
+      res.status(422).send("Sorry you miss any information");
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error retrieving places from database");
+  });
+}
 
 
 
 
-};
+
 module.exports = {
   createTrip,
   getTrips,
   getPlaces,
   getAllDays,
   getPlaceToVisit,
-  getInfoOfTrip
+  getInfoOfTrip,
+  createPlaceToVisit,
+  editTrip
 };

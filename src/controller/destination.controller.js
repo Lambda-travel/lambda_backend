@@ -40,6 +40,7 @@ Destination.destinationDetail(id)
 /*****************  CREATE DESTINATION  *****************/
 
  const createDestination =(req,res)=> {
+
     const {place_to_visit,location,description,image} = req.body
     const id = Number(req.params.id)
 
