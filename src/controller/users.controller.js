@@ -34,9 +34,19 @@ const createNewUser=(req, res)=>{
         })
 }
 
+const login=(req, res)=>{
+    if(req.user !== null && Object.keys(req.user).length>0){
+    res.status(200).send(req.user)
+    }else {
+        res.status(404).send('Invalid credentials')
+    }
+
+}
+
 
 
 module.exports = { 
     getUserById,
     createNewUser,
+    login
 }

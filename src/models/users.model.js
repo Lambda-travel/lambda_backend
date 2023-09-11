@@ -23,9 +23,17 @@ const verifyRegisterEmail=(email)=>{
     return database.query('SELECT email FROM users WHERE email=?', email)
         .then(([results])=> results)
 }
+
+const findUserToLogin=(email)=>{
+    return database.query('SELECT * FROM users WHERE email=?', email)
+        .then(([results])=> results)
+}
+
+
 module.exports = {
     getById,
     verifyByEmail,
     createUser,
     verifyRegisterEmail,
+    findUserToLogin
 }
