@@ -1,5 +1,6 @@
 const argon2= require('argon2')
 const Users = require("../models/users.model");
+const jwt = require('jsonwebtoken')
 
 const verifyEmailOrUser = (req, res, next) => {
   const { value } = req.body;
@@ -24,9 +25,15 @@ const hashingOptions={
 }
 
 const hashPassword=(req, res, next)=>{
+  if(req.body.newPassword!== null){
+    req.body.password = req.body.newPassword
+  }
   argon2.hash(req.body.password,hashingOptions)
     .then(hashedPassword=>{
       delete req.body.password
+      if(req.body.newPassword!== null){
+        delete req.body.newPassword
+      }
       req.body.hashed_password = hashedPassword
       next()  
     })
@@ -96,6 +103,34 @@ const verifyPassword=(req, res, next)=>{
       });
 
 }
+const verifyToken=(req, res, next)=>{
+
+  const authorizationHeader= req.get("Authorization");
+
+  if(authorizationHeader === null){
+    res.status(403).send('Authorization header is missing')
+  }
+
+  const [type, token] = authorizationHeader.split(" ");
+
+  
+  if(type !== "Bearer"){
+    res.status(403).send('Authorization header has not the "Bearer" type')
+  }
+
+  jwt.verify(token, process.env.PRIVATE_KEY, (error, decoded)=>{
+    if(error){
+      console.error(error);
+      res.status(403).send('Error decoding authorization header')
+    }else{
+      // console.log(req.body);
+      req.body.email = decoded.sub
+      next()
+    }
+  })
+
+
+}
 
 
 module.exports = {
@@ -104,5 +139,6 @@ module.exports = {
   hashPassword,
   verifyEmailToRegisterUser,
   verifyEmail,
-  verifyPassword
+  verifyPassword,
+  verifyToken
 };
