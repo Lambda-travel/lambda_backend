@@ -29,11 +29,19 @@ const findUserToLogin=(email)=>{
         .then(([results])=> results)
 }
 
+const newPasswordChange = (hashedPassword, email)=>{
+    // console.log(hashedPassword, email);
+    return database.query('UPDATE users SET hashed_password=? WHERE email =?', [hashedPassword, email])
+        .then(([results])=> results);
+}
+
+
 
 module.exports = {
     getById,
     verifyByEmail,
     createUser,
     verifyRegisterEmail,
-    findUserToLogin
+    findUserToLogin,
+    newPasswordChange,
 }
