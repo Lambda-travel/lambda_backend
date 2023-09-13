@@ -1,4 +1,5 @@
 const Trip = require("../models/new-trip.model");
+const Users = require("../models/users.model");
 const TravelMates = require("../models/travelmate.model");
 
 const createTrip = (req, res) => {
@@ -155,7 +156,7 @@ const getInfoOfTrip =(req,res)=> {
 
 const getPlaces = (req, res) => {
   //! this ID should come from the TOKEN
-  const id = 1;
+  const {id} = req.params
   Trip.getPlacesToVisit(id)
     .then((result) => {
       if (result !== null && result.length > 0) {
@@ -195,9 +196,28 @@ const getPlaces = (req, res) => {
 const getTravelMates = (req, res) => {
 const {id} = req.params
 TravelMates.getTravelMatesByTripId(id)
-  .then((results)=> {
+  .then(async(results)=> {
     if (results !== null && results.length > 0) {
-      res.status(200).send(results)
+      
+      const travelMates = results.filter(result => result.user_id !== req.userId)
+      
+      try {
+        const pictures = await Users.getTravelMatesPicture(travelMates);
+
+        if(pictures !== null && pictures.length > 0) {
+          res.status(200).send(pictures)
+        } else {
+          res.status(404).send("Unable to find travel mates pictures")
+        }
+      } catch (error) {
+        res.status(500).json({
+          error: "Error generating date range",
+          message: error.message,
+        });
+      }
+      
+      
+      // res.status(200).send(results)
     } else {
       res.status(404).send("Cannot find travel mates.");
     }

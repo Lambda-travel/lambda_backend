@@ -11,7 +11,7 @@ const getTravelMateUserById = (userId, trip_id) => {
 
 const getTravelMatesByTripId = (tripId) => {
   return database
-    .query("SELECT * FROM travel_mates WHERE trip_id=?", tripId)
+    .query("SELECT user_id FROM travel_mates WHERE trip_id=?", tripId)
     .then(([results]) => results);
 };
 

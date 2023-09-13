@@ -11,9 +11,9 @@ tripRouter.post("/", verifyToken, NewTripController.createTrip);
 //! missing token verify to get userID
 tripRouter.get("/", verifyToken, NewTripController.getTrips);
 
-tripRouter.get("/place", NewTripController.getPlaces);
+tripRouter.get("/:id/total-places", NewTripController.getPlaces);
 
-tripRouter.get("/:id/travelMates", NewTripController.getTravelMates);
+tripRouter.get("/:id/travelMates",verifyToken, NewTripController.getTravelMates);
 
 /*--------- GET ALL DAYS OF TRIP-------------*/
 
