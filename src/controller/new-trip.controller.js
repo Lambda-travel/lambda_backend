@@ -1,6 +1,10 @@
 const Trip = require("../models/new-trip.model");
+const TravelMates = require("../models/travelmate.model");
 
 const createTrip = (req, res) => {
+
+  if(req.body.email) delete req.body.email;
+
   Trip.createNewTrip(req.body)
     .then(async (results) => {
       if (results.affectedRows > 0) {
@@ -95,9 +99,8 @@ const getAllDays =(req,res)=> {
 
 const getTrips = (req, res) => {
   //! this ID should come from the TOKEN
-  const id = 1;
-
-  Trip.getAllTrips(id)
+// console.log(req.userId);
+  Trip.getAllTrips(req.userId)
     .then((result) => {
       if (result !== null && result.length > 0) {
         res.status(200).send(result);
@@ -189,7 +192,21 @@ const getPlaces = (req, res) => {
 }
 
 
-
+const getTravelMates = (req, res) => {
+const {id} = req.params
+TravelMates.getTravelMatesByTripId(id)
+  .then((results)=> {
+    if (results !== null && results.length > 0) {
+      res.status(200).send(results)
+    } else {
+      res.status(404).send("Cannot find travel mates.");
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error retrieving places from database");
+  });
+}
 
 
 module.exports = {
@@ -200,5 +217,6 @@ module.exports = {
   getPlaceToVisit,
   getInfoOfTrip,
   createPlaceToVisit,
-  editTrip
+  editTrip,
+  getTravelMates
 };
