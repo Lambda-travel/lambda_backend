@@ -17,9 +17,10 @@ const createTrip = (req, res) => {
           Trip.createNewTravelMateTrip(data)
             .then((results) => {
               if (results.affectedRows > 0) {
-                res
-                  .status(201)
-                  .json({message:"New trip created! Date range also generated!", tripId: tripId});
+                res.status(201).json({
+                  message: "New trip created! Date range also generated!",
+                  tripId: tripId,
+                });
               } else {
                 res
                   .status(422)
@@ -34,7 +35,6 @@ const createTrip = (req, res) => {
                 message: err.message,
               });
             });
-
         } catch (error) {
           res.status(500).json({
             error: "Error generating date range",
@@ -53,26 +53,23 @@ const createTrip = (req, res) => {
     });
 };
 
-
-
 /***************** GET LIST OF DAYS FROM TRIP *********************/
 
-const getAllDays =(req,res)=> {
-  const id = Number(req.params.id)
+const getAllDays = (req, res) => {
+  const id = Number(req.params.id);
   Trip.getAllDays(id)
-  .then((result)=>{
-    if(result !== null && result.length > 0){
-      res.status(200).send(result)
-    } else {
-      res.status(404).send("Not Found!")
-    }
-    
-  })
-  .catch((err) => {
-    console.error(err);
-    res.status(500).send("Error creating your new trip in the database");
-  });
-}
+    .then((result) => {
+      if (result !== null && result.length > 0) {
+        res.status(200).send(result);
+      } else {
+        res.status(404).send("Not Found!");
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error creating your new trip in the database");
+    });
+};
 
 /*************** GET ALL TRIPS **********************/
 
@@ -92,49 +89,48 @@ const getTrips = (req, res) => {
       console.error(err);
       res.status(500).send("Error creating your new trip in the database");
     });
-}
-
+};
 
 /*************** GET TRIP BY ID **********************/
 
-const getInfoOfTrip =(req,res)=> {
-  const id = Number(req.params.id)
+const getInfoOfTrip = (req, res) => {
+  const id = Number(req.params.id);
   Trip.getInfoOfTrip(id)
-  .then((result)=> {
-    if(result !== null) {
-      res.status(200).send(result)
-    } else {
-      res.status(404).send("Not Found")
-   }
-  })
-  .catch((err) => {
-   console.error(err);
-   res.status(500).send("Error creating your new trip in the database");
-  });
-}
-
+    .then((result) => {
+      if (result !== null) {
+        res.status(200).send(result);
+      } else {
+        res.status(404).send("Not Found");
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error creating your new trip in the database");
+    });
+};
 
 /*************** GET PLACE TO VISIT **********************/
- const getPlaceToVisit =(req,res)=> {
-   const id = Number(req.params.id)
-   Trip.placeToVisit(id)
-   .then((result)=> {
-     if(result !== null) {
-       res.status(200).send(result)
-     } else {
-       res.status(404).send("Not Found")
-    }
-   })
-   .catch((err) => {
-    console.error(err);
-    res.status(500).send("Error creating your new trip in the database");
-   });
- }
-
+const getPlaceToVisit = (req, res) => {
+  const id = Number(req.params.id);
+  Trip.placeToVisit(id)
+    .then((result) => {
+      if (result !== null) {
+        res.status(200).send(result);
+      } else {
+        res.status(404).send("Not Found");
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error creating your new trip in the database");
+    });
+};
 
 const getPlaces = (req, res) => {
   //! this ID should come from the TOKEN
-  const id = 1;
+
+  const { id } = req.params;
+
   Trip.getPlacesToVisit(id)
     .then((result) => {
       if (result !== null && result.length > 0) {
@@ -147,11 +143,6 @@ const getPlaces = (req, res) => {
       console.error(err);
       res.status(500).send("Error retrieving places from database");
     });
-
-
-
-
-
 };
 module.exports = {
   createTrip,
@@ -159,5 +150,5 @@ module.exports = {
   getPlaces,
   getAllDays,
   getPlaceToVisit,
-  getInfoOfTrip
+  getInfoOfTrip,
 };
