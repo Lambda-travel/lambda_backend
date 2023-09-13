@@ -23,4 +23,12 @@ tripRouter.get("/overview/:id", NewTripController.getInfoOfTrip);
 
 tripRouter.get("/place/:id", NewTripController.getPlaceToVisit);
 
+/*--------- CREATE A PLACE TO VISIT ------------*/
+
+tripRouter.post("/place/:id", NewTripController.createPlaceToVisit);
+
+/*---------» EDIT TRIP INFO «------------*/
+
+tripRouter.put("/edit/:id", NewTripController.editTrip);
+
 module.exports = tripRouter;

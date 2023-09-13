@@ -1,5 +1,6 @@
 const argon2= require('argon2')
 const Users = require("../models/users.model");
+const jwt = require('jsonwebtoken')
 
 const verifyEmailOrUser = (req, res, next) => {
   const { value } = req.body;
@@ -24,9 +25,15 @@ const hashingOptions={
 }
 
 const hashPassword=(req, res, next)=>{
+  if(req.body.newPassword!== null){
+    req.body.password = req.body.newPassword
+  }
   argon2.hash(req.body.password,hashingOptions)
     .then(hashedPassword=>{
       delete req.body.password
+      if(req.body.newPassword!== null){
+        delete req.body.newPassword
+      }
       req.body.hashed_password = hashedPassword
       next()  
     })
@@ -36,7 +43,7 @@ const hashPassword=(req, res, next)=>{
     })
 }
 
-const verifyEmailExists=(req, res, next)=>{
+const verifyEmailToRegisterUser=(req, res, next)=>{
   Users.verifyRegisterEmail(req.body.email)
   .then(results =>{
     if(results!== null && results.length>0){
@@ -45,6 +52,84 @@ const verifyEmailExists=(req, res, next)=>{
       next()
     }
   })
+  .catch((error)=>{
+    console.error(error)
+    res.status(500).send('Error retrieving data from the database')
+  });
+};
+
+const verifyEmail=(req, res, next)=>{
+  Users.verifyRegisterEmail(req.body.email)
+  .then(results =>{
+    if(results!== null && results.length>0){
+      next()
+    }else {
+      res.status(401).send('This email is not registered, please create an account first')
+    }
+  })
+  .catch((error)=>{
+    console.error(error)
+    res.status(500).send('Error retrieving data from the database')
+  });
+};
+
+const verifyPassword=(req, res, next)=>{
+  //*get the user hashed password
+  Users.findUserToLogin(req.body.email)
+      .then((user)=>{
+        if(user !== null && user.length>0){
+          argon2.verify(user[0].hashed_password, req.body.password )
+              .then((isVerified)=>{
+                if(isVerified){
+                  delete user[0].hashed_password
+                  req.user = user[0]
+                  next()
+                }else{
+                  res.status(401).send('Invalid password')
+                }
+              })
+              .catch((error)=>{
+                console.error(error)
+                res.status(500).send('Error verifying the password')
+              });
+
+        }else{
+          res.status(404).send('User not found')
+        }
+      })
+      .catch((error)=>{
+        console.error(error)
+        res.status(500).send('Error retrieving user from database')
+      });
+
+}
+const verifyToken=(req, res, next)=>{
+
+  const authorizationHeader= req.get("Authorization");
+
+  if(authorizationHeader === null){
+    res.status(403).send('Authorization header is missing')
+  }
+
+  const [type, token] = authorizationHeader.split(" ");
+
+  
+  if(type !== "Bearer"){
+    res.status(403).send('Authorization header has not the "Bearer" type')
+  }
+
+  jwt.verify(token, process.env.PRIVATE_KEY, (error, decoded)=>{
+    if(error){
+      console.error(error);
+      res.status(403).send('Error decoding authorization header')
+    }else{
+      // console.log(req.body);
+      req.body.email = decoded.sub
+      next()
+    }
+  })
+
+
 }
 
 
@@ -52,5 +137,8 @@ module.exports = {
   verifyEmailOrUser,
   verifyUser,
   hashPassword,
-  verifyEmailExists,
+  verifyEmailToRegisterUser,
+  verifyEmail,
+  verifyPassword,
+  verifyToken
 };
