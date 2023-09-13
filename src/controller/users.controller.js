@@ -21,7 +21,6 @@ const getUserById=(req, res)=>{
 }
 
 const createNewUser=(req, res)=>{
-        
         Users.createUser(req.body)
         .then(results => {
             if(results.affectedRows>0){
