@@ -1,6 +1,9 @@
 const Users = require('../models/users.model')
 const jwt = require('jsonwebtoken');
 require('dotenv').config()
+const randomString = require('randomstring')
+const argon2= require('argon2')
+const {temporaryPasswordSendEmail}= require('../helpers/sendEmail')
 
 
 const getUserById=(req, res)=>{
@@ -85,6 +88,42 @@ const getUserInfo=(req, res)=>{
 
 }
 
+const forgotPassword =(req, res)=>{
+    const {email} = req.body
+    const tempPassword= randomString.generate()
+    
+    const hashingOptions={
+        type: argon2.argon2id,
+        memoryCost: 2 ** 16,
+        timeCost: 5,
+        parallelism: 1,
+      }
+      argon2.hash(tempPassword, hashingOptions)
+      .then(hashedPassword=>{
+        
+        Users.newPasswordChange(hashedPassword, email )
+        .then((results)=>{
+            if(results.affectedRows>0){
+                console.log('password changed');
+                let subject = 'Temporary Password'
+                temporaryPasswordSendEmail(email, subject, tempPassword)
+                res.status(200).send('An email has been sent with your new temporary password')
+            }else{
+                res.status(401).send('Error sending email please check your email')
+            }  
+        })
+        .catch((error)=>{
+            console.error(error);
+            res.status(500).send("We can't send you the email wit the temporary password")
+        });
+
+      })
+      .catch((error)=>{
+        console.error(error)
+        res.status(500).send('Error hashing the password')
+      })
+
+}
 
 
 module.exports = { 
@@ -92,5 +131,6 @@ module.exports = {
     createNewUser,
     login,
     getUserInfo,
-    changePassword
+    changePassword,
+    forgotPassword
 }
