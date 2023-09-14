@@ -1,16 +1,19 @@
 const express = require("express");
 const tripRouter = express.Router();
 const NewTripController = require("../controller/new-trip.controller");
+const {hashPassword, verifyEmailToRegisterUser, verifyEmail, verifyPassword, verifyToken}= require('../middlewares/users.middlewares')
+
 
 //* /trip
-tripRouter.post("/", NewTripController.createTrip);
+tripRouter.post("/", verifyToken, NewTripController.createTrip);
 
 // get * /trip
 //! missing token verify to get userID
-tripRouter.get("/", NewTripController.getTrips);
+tripRouter.get("/", verifyToken, NewTripController.getTrips);
 
-tripRouter.get("/place", NewTripController.getPlaces);
+tripRouter.get("/:id/total-places", NewTripController.getPlaces);
 
+tripRouter.get("/:id/travelMates",verifyToken, NewTripController.getTravelMates);
 
 /*--------- GET ALL DAYS OF TRIP-------------*/
 
