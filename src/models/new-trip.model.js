@@ -44,11 +44,33 @@ const editTrip =(body,trip_id)=>{
 
 }
 
+const updateDateRange = async(startDate, endDate, tripId) => {
+  let currentDate = new Date(startDate);
+  const endDateObj = new Date(endDate);
+  
+  try {
+    while (currentDate <= endDateObj) {
+      const formattedDate = currentDate.toISOString().split('T')[0];
+
+      await database.execute('UPDATE number_days (day, trip_id) VALUES (?, ?)', [
+        formattedDate,
+        tripId,
+      ]);
+
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+  } catch (error) {
+    throw error;
+    
+  }
+
+return 1;
+};
 
   /*************** GET LIST OF DAYS FROM TRIP ************************/
   
   const getAllDays =(id)=> {
-    return database.query("SELECT * FROM number_days where trip_id=?",id)
+    return database.query("SELECT * FROM number_days where trip_id=? ORDER BY day ASC",id)
     .then(([result])=> result)
   }
 
@@ -91,6 +113,15 @@ const createPlaceToVisit =(name,description,tripID)=>{
 }
 
 
+/*************** edit days middleware ***************/
+
+
+const deleteDaysTrip =(id)=>{
+  return database.query("DELETE FROM number_days WHERE id=?",id)
+  .then(([results])=> results)
+}
+
+
 module.exports={
     createNewTrip,
     generateDateRange,
@@ -101,6 +132,8 @@ module.exports={
     getPlacesToVisit,
     getInfoOfTrip,
     createPlaceToVisit,
-    editTrip
+    editTrip,
+    updateDateRange,
+    deleteDaysTrip
 }
 

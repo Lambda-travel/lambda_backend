@@ -1,6 +1,7 @@
 const express = require("express");
 const tripRouter = express.Router();
 const NewTripController = require("../controller/new-trip.controller");
+const daysMiddleware = require("../middlewares/editDays.middleware");
 const {
   hashPassword,
   verifyEmailToRegisterUser,
@@ -42,6 +43,6 @@ tripRouter.post("/place/:id", NewTripController.createPlaceToVisit);
 
 /*---------» EDIT TRIP INFO «------------*/
 
-tripRouter.put("/edit/:id", NewTripController.editTrip);
+tripRouter.put("/edit/:id", daysMiddleware, NewTripController.editTrip);
 
 module.exports = tripRouter;

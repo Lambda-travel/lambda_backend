@@ -15,14 +15,14 @@ CREATE TABLE trips(
     end_date DATE NOT NULL,
     trip_image_url TEXT,
     user_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE number_days(
     id INT PRIMARY KEY AUTO_INCREMENT,
     day VARCHAR(255) NOT NULL,
     trip_id INT NOT NULL,
-    FOREIGN KEY (trip_id) REFERENCES trips(id)
+    FOREIGN KEY (trip_id) REFERENCES trips(id) ON DELETE CASCADE
 );
 
 CREATE TABLE destinations(
@@ -31,13 +31,14 @@ CREATE TABLE destinations(
     location VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     day_id INT NOT NULL,
-    FOREIGN KEY (day_id) REFERENCES number_days(id)
+    FOREIGN KEY (day_id) REFERENCES number_days(id) ON DELETE CASCADE
+    
 );
 
 CREATE TABLE destination_images(
     destination_id INT NOT NULL,
     image_url TEXT NOT NULL,
-    FOREIGN KEY (destination_id) REFERENCES destinations(id)
+    FOREIGN KEY (destination_id) REFERENCES destinations(id) ON DELETE CASCADE
 );
 
 CREATE TABLE articles(
