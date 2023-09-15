@@ -1,11 +1,14 @@
 const Users = require("../models/users.model");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const randomString = require("randomstring");
+const argon2 = require("argon2");
+const { temporaryPasswordSendEmail } = require("../helpers/sendEmail");
 
 const getUserById = (req, res) => {
   const id = Number(req.params.id);
 
-  Users.getById(1)
+  Users.getById(id)
     .then((results) => {
       if (results !== null && results.length > 0) {
         res.status(200).send(results);
@@ -40,7 +43,6 @@ const createNewUser = (req, res) => {
 
 const login = (req, res) => {
   const { id, email } = req.user;
-
   if (req.user !== null && Object.keys(req.user).length > 0) {
     const token = jwt.sign(
       {
@@ -89,10 +91,50 @@ const getUserInfo = (req, res) => {
     });
 };
 
+const forgotPassword = (req, res) => {
+  const { email } = req.body;
+  const tempPassword = randomString.generate();
+
+  const hashingOptions = {
+    type: argon2.argon2id,
+    memoryCost: 2 ** 16,
+    timeCost: 5,
+    parallelism: 1,
+  };
+  argon2
+    .hash(tempPassword, hashingOptions)
+    .then((hashedPassword) => {
+      Users.newPasswordChange(hashedPassword, email)
+        .then((results) => {
+          if (results.affectedRows > 0) {
+            console.log("password changed");
+            let subject = "Temporary Password";
+            temporaryPasswordSendEmail(email, subject, tempPassword);
+            res
+              .status(200)
+              .send("An email has been sent with your new temporary password");
+          } else {
+            res.status(401).send("Error sending email please check your email");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          res
+            .status(500)
+            .send("We can't send you the email wit the temporary password");
+        });
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("Error hashing the password");
+    });
+};
+
 module.exports = {
   getUserById,
   createNewUser,
   login,
   getUserInfo,
   changePassword,
+  forgotPassword,
 };

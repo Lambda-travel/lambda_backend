@@ -1,6 +1,10 @@
 const Trip = require("../models/new-trip.model");
+const Users = require("../models/users.model");
+const TravelMates = require("../models/travelmate.model");
 
 const createTrip = (req, res) => {
+  if (req.body.email) delete req.body.email;
+
   Trip.createNewTrip(req.body)
     .then(async (results) => {
       if (results.affectedRows > 0) {
@@ -94,9 +98,8 @@ const getAllDays = (req, res) => {
 
 const getTrips = (req, res) => {
   //! this ID should come from the TOKEN
-  const id = 1;
-
-  Trip.getAllTrips(id)
+  // console.log(req.userId);
+  Trip.getAllTrips(req.userId)
     .then((result) => {
       if (result !== null && result.length > 0) {
         res.status(200).send(result);
@@ -148,9 +151,7 @@ const getPlaceToVisit = (req, res) => {
 
 const getPlaces = (req, res) => {
   //! this ID should come from the TOKEN
-
   const { id } = req.params;
-
   Trip.getPlacesToVisit(id)
     .then((result) => {
       if (result !== null && result.length > 0) {
@@ -184,6 +185,41 @@ function createPlaceToVisit(req, res) {
     });
 }
 
+const getTravelMates = (req, res) => {
+  const { id } = req.params;
+  TravelMates.getTravelMatesByTripId(id)
+    .then(async (results) => {
+      if (results !== null && results.length > 0) {
+        const travelMates = results.filter(
+          (result) => result.user_id !== req.userId
+        );
+
+        try {
+          const pictures = await Users.getTravelMatesPicture(travelMates);
+
+          if (pictures !== null && pictures.length > 0) {
+            res.status(200).send(pictures);
+          } else {
+            res.status(404).send("Unable to find travel mates pictures");
+          }
+        } catch (error) {
+          res.status(500).json({
+            error: "Error generating date range",
+            message: error.message,
+          });
+        }
+
+        // res.status(200).send(results)
+      } else {
+        res.status(404).send("Cannot find travel mates.");
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error retrieving places from database");
+    });
+};
+
 module.exports = {
   createTrip,
   getTrips,
@@ -193,4 +229,6 @@ module.exports = {
   getInfoOfTrip,
   createPlaceToVisit,
   editTrip,
+
+  getTravelMates,
 };

@@ -18,7 +18,8 @@ usersRouter.post('/login',verifyEmail, verifyPassword, UsersController.login )
 //* /users/change-password
 usersRouter.post('/change-password',verifyToken, verifyPassword, hashPassword, UsersController.changePassword)
 
-
+//* /users/forgot-password
+usersRouter.post('/forgot-password',verifyEmail, UsersController.forgotPassword )
 
 
 module.exports= usersRouter
