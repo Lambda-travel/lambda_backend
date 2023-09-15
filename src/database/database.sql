@@ -31,7 +31,8 @@ CREATE TABLE destinations(
     location VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     day_id INT NOT NULL,
-    FOREIGN KEY (day_id) REFERENCES number_days(id)
+    FOREIGN KEY (day_id) REFERENCES number_days(id) ON DELETE CASCADE
+    
 );
 
 CREATE TABLE destination_images(
