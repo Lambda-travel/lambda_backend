@@ -102,7 +102,6 @@ const getAllDays =(req,res)=> {
 
 const getTrips = (req, res) => {
   //! this ID should come from the TOKEN
-// console.log(req.userId);
   Trip.getAllTrips(req.userId)
     .then((result) => {
       if (result !== null && result.length > 0) {
@@ -132,7 +131,7 @@ const getInfoOfTrip =(req,res)=> {
   })
   .catch((err) => {
    console.error(err);
-   res.status(500).send("Error creating your new trip in the database");
+   res.status(500).send("Error getting your trip info from the database");
   });
 }
 

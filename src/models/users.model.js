@@ -3,7 +3,6 @@ const database = require('../database/database.config')
 
 
 const getById = (id)=>{
-    // console.log(id)
     return database.query('SELECT * FROM users WHERE id=? ', id)
         .then(([results])=> results)
 }
@@ -30,7 +29,6 @@ const findUserToLogin=(email)=>{
 }
 
 const newPasswordChange = (hashedPassword, email)=>{
-    // console.log(hashedPassword, email);
     return database.query('UPDATE users SET hashed_password=? WHERE email =?', [hashedPassword, email])
         .then(([results])=> results);
 }
@@ -60,7 +58,7 @@ const getTravelMatesPicture = async(users) => {
         throw error;
         
       }
-      console.log("FINAL", pictures);
+    //   console.log("FINAL", pictures);
 
 }
 

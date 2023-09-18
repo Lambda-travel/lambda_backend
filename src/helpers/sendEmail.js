@@ -17,9 +17,8 @@ const inviteTravelmateSendEmail =(user_name, receiver, subject) =>{
             console.log(info);
         })
         .catch(err=>{
-            console.log(err);
+            console.error(err);
         })
-    console.log(emailBody);
 }
 
 const temporaryPasswordSendEmail =( receiver, subject, tempPassword)=>{
@@ -38,7 +37,6 @@ const temporaryPasswordSendEmail =( receiver, subject, tempPassword)=>{
         .catch(err=>{
             console.error(err);
         })
-    console.log(emailBody);
 }
 
 module.exports ={
