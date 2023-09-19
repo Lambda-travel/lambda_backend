@@ -90,7 +90,7 @@ const getUserInfo=(req, res)=>{
 
 const forgotPassword =(req, res)=>{
     const {email} = req.body
-    const tempPassword= randomString.generate()
+    const tempPassword= randomString.generate()+"!"
     
     const hashingOptions={
         type: argon2.argon2id,
