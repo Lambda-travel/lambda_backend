@@ -8,12 +8,19 @@ destinationRouter.get('/:id', destinationController.getDestinationById )
 
 /**************  DESTINATION DETAIL  *********/
 
-destinationRouter.get('/detail/:id', destinationController.destinationDetails )
+destinationRouter.get('/detailsCard/:id', destinationController.destinationDetailsCard )
+
+destinationRouter.get('/details/:id', destinationController.destinationDetails )
 
 
 /*********** CREATE DESTINATION *************/
+// post images
+destinationRouter.post("/images",destinationController.createDestinationImages)
 
+
+/*********** CREATE DESTINATION *************/
 destinationRouter.post("/:id",destinationController.createDestination)
+
 
 
 

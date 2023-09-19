@@ -40,25 +40,14 @@ const getTravelMatesPicture = async(users) => {
             return queryResult[0][0]
           });
       
-          // Wait for all promises to resolve
           const profilePictures = await Promise.all(promises);
 
         return profilePictures
-        // while (currentDate <= endDateObj) {
-        //   const formattedDate = currentDate.toISOString().split('T')[0];
-    
-        //   await database.execute('INSERT INTO number_days (day, trip_id) VALUES (?, ?)', [
-        //     formattedDate,
-        //     tripId,
-        //   ]);
-    
-        //   currentDate.setDate(currentDate.getDate() + 1);
-        // }
+      
       } catch (error) {
         throw error;
         
       }
-    //   console.log("FINAL", pictures);
 
 }
 
