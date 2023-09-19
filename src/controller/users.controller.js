@@ -130,6 +130,22 @@ const forgotPassword = (req, res) => {
     });
 };
 
+const editUser = (req, res) => {
+  const user_id = Number(req.params.id);
+  const { body } = req;
+  Users.editUser(body, user_id)
+    .then((results) => {
+      if (results.affectedRows > 0) {
+        res.sendStatus(200);
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error updating user");
+    });
+};
 module.exports = {
   getUserById,
   createNewUser,
@@ -137,4 +153,5 @@ module.exports = {
   getUserInfo,
   changePassword,
   forgotPassword,
+  editUser,
 };

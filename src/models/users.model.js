@@ -71,6 +71,13 @@ const newPasswordChange = (hashedPassword, email) => {
     .then(([results]) => results);
 };
 
+const editUser = (body, user_id) => {
+  return database
+    .query("UPDATE users SET ? WHERE id=?", [body, user_id])
+    .then(([results]) => results)
+    .catch((err) => console.error(err));
+};
+
 module.exports = {
   getById,
   verifyByEmail,
@@ -79,4 +86,5 @@ module.exports = {
   findUserToLogin,
   newPasswordChange,
   getTravelMatesPicture,
+  editUser,
 };
