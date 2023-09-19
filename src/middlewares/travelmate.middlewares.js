@@ -3,7 +3,6 @@ const TravelMate = require("../models/travelmate.model");
 
 const verifyEmailOrUser = (req, res, next) => {
   const { value } = req.body;
-  // console.log(req.body);
   Users.verifyByEmail(value)
     .then((results) => {
       if (results[0] !== undefined) {

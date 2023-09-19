@@ -126,7 +126,6 @@ const verifyToken = (req, res, next) => {
       console.error(error);
       res.status(403).send("Error decoding authorization header");
     } else {
-      // console.log(req.body);
       req.userId = decoded.userId;
       req.body.email = decoded.sub;
       next();
