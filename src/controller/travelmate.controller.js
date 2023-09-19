@@ -10,7 +10,6 @@ const inviteTravelmate = (req, res) => {
     user_id: id,
   };
   const {user_name, email}= req.travelMate;
-  console.log(req.travelMate);
 
   let subject="Invite for a new trip"
   inviteTravelmateSendEmail(user_name, email, subject)

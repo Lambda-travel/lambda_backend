@@ -59,24 +59,23 @@ const createTrip = (req, res) => {
 
 /**************  EDIT TRIP **************************/
 
-const editTrip =(req,res)=>{
-  const trip_id = Number(req.params.id)
-  const {body} = req
+const editTrip = (req, res) => {
+  const trip_id = Number(req.params.id);
+  const { body } = req;
 
-  Trip.editTrip(body,trip_id)
-  .then((result)=> {
-    if(result.affectedRows > 0) {
-      res.sendStatus(200)
-    }else {
-      res.sendStatus(404)
-    }
-  })
-  .catch((err) => {
-    console.error(err);
-    res.status(500).send("Error creating your new trip in the database");
-  });
-
-}
+  Trip.editTrip(body, trip_id)
+    .then((result) => {
+      if (result.affectedRows > 0) {
+        res.sendStatus(200);
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error creating your new trip in the database");
+    });
+};
 
 /***************** GET LIST OF DAYS FROM TRIP *********************/
 
@@ -100,7 +99,6 @@ const getAllDays = (req, res) => {
 
 const getTrips = (req, res) => {
   //! this ID should come from the TOKEN
-  // console.log(req.userId);
   Trip.getAllTrips(req.userId)
     .then((result) => {
       if (result !== null && result.length > 0) {
@@ -129,7 +127,7 @@ const getInfoOfTrip = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send("Error creating your new trip in the database");
+      res.status(500).send("Error getting your trip info from the database");
     });
 };
 
@@ -221,7 +219,6 @@ const getTravelMates = (req, res) => {
       res.status(500).send("Error retrieving places from database");
     });
 };
-
 
 module.exports = {
   createTrip,

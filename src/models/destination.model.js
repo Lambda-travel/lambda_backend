@@ -3,7 +3,7 @@ const database = require('../database/database.config')
 const getById = (id)=> {
 
     return database.query('SELECT * FROM destinations WHERE day_id=? ', id)
-        .then(([results])=>results) //*console.log the results first to check
+        .then(([results])=>results)
 
 }
 

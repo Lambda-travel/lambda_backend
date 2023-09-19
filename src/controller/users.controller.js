@@ -43,6 +43,7 @@ const createNewUser = (req, res) => {
 
 const login = (req, res) => {
   const { id, email } = req.user;
+
   if (req.user !== null && Object.keys(req.user).length > 0) {
     const token = jwt.sign(
       {
@@ -93,7 +94,7 @@ const getUserInfo = (req, res) => {
 
 const forgotPassword = (req, res) => {
   const { email } = req.body;
-  const tempPassword = randomString.generate();
+  const tempPassword = randomString.generate() + "!";
 
   const hashingOptions = {
     type: argon2.argon2id,
