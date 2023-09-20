@@ -24,28 +24,6 @@ const hashingOptions = {
   parallelism: 1,
 };
 
-// const hashPassword=(req, res, next)=>{
-//   console.log(error);
-//   if(req.body.newPassword !== null && req.body.newPassword !== undefined){
-//     req.body.password = req.body.newPassword
-//   }
-//   argon2
-//     .hash(req.body.password, hashingOptions)
-//     .then((hashedPassword) => {
-//       delete req.body.password;
-
-//       if(req.body.newPassword !== null && eq.body.newPassword !== undefined){
-//         delete req.body.newPassword
-//       }
-//       req.body.hashedPassword = hashedPassword;
-
-//       next();
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//       res.status(500).send("Error hashing the password");
-//     });
-// }
 const hashPassword = (req, res, next) => {
   if (req.body.newPassword !== null && req.body.newPassword !== undefined) {
     req.body.password = req.body.newPassword;
@@ -148,7 +126,6 @@ const verifyToken = (req, res, next) => {
       console.error(error);
       res.status(403).send("Error decoding authorization header");
     } else {
-      // console.log(req.body);
       req.userId = decoded.userId;
       req.body.email = decoded.sub;
       next();

@@ -13,6 +13,5 @@ const transporter = mailer.createTransport({
     },
 });
 
-// console.log(transporter);
 
 module.exports = transporter

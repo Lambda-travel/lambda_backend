@@ -108,7 +108,6 @@ const forgotPassword = (req, res) => {
       Users.newPasswordChange(hashedPassword, email)
         .then((results) => {
           if (results.affectedRows > 0) {
-            console.log("password changed");
             let subject = "Temporary Password";
             temporaryPasswordSendEmail(email, subject, tempPassword);
             res

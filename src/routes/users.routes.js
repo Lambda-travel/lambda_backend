@@ -10,7 +10,7 @@ const {
 } = require("../middlewares/users.middlewares");
 
 //* /users/id
-usersRouter.get("/:id", UsersController.getUserById);
+usersRouter.get("/:id", verifyToken, UsersController.getUserById);
 
 //* /users
 usersRouter.get("/", verifyToken, UsersController.getUserInfo);

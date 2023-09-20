@@ -38,6 +38,7 @@ CREATE TABLE destinations(
 CREATE TABLE destination_images(
     destination_id INT NOT NULL,
     image_url TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (destination_id) REFERENCES destinations(id) ON DELETE CASCADE
 );
 

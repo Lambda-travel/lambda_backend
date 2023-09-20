@@ -14,7 +14,6 @@ const {
 tripRouter.post("/", verifyToken, NewTripController.createTrip);
 
 // get * /trip
-//! missing token verify to get userID
 tripRouter.get("/", verifyToken, NewTripController.getTrips);
 
 tripRouter.get("/:id/total-places", NewTripController.getPlaces);

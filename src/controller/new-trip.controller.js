@@ -186,7 +186,7 @@ function createPlaceToVisit(req, res) {
 }
 
 const getTravelMates = (req, res) => {
-  const { id } = req.params;
+  const id = Number(req.params.id);
   TravelMates.getTravelMatesByTripId(id)
     .then(async (results) => {
       if (results !== null && results.length > 0) {
@@ -194,8 +194,10 @@ const getTravelMates = (req, res) => {
           (result) => result.user_id !== req.userId
         );
 
+
         try {
           const pictures = await Users.getTravelMatesPicture(travelMates);
+          
 
           if (pictures !== null && pictures.length > 0) {
             res.status(200).send(pictures);
@@ -204,7 +206,7 @@ const getTravelMates = (req, res) => {
           }
         } catch (error) {
           res.status(500).json({
-            error: "Error generating date range",
+            error: "Unable to find travel mates pictures",
             message: error.message,
           });
         }

@@ -30,38 +30,25 @@ const findUserToLogin = (email) => {
     .then(([results]) => results);
 };
 
-const getTravelMatesPicture = async (users) => {
-  try {
-    const promises = users.map(async (user) => {
-      const queryResult = await database.execute(
-        "SELECT user_name, profile_image_url FROM users WHERE id = ?",
-        [user.user_id]
-      );
-      return queryResult[0][0];
-    });
+const getTravelMatesPicture = async(users) => {
+    try {
+        const promises = users.map(async (user) => {
+            const queryResult = await database.execute('SELECT user_name, profile_image_url FROM users WHERE id = ?', [user.user_id]);
+            return queryResult[0][0]
+          });
+      
+          const profilePictures = await Promise.all(promises);
 
-    // Wait for all promises to resolve
-    const profilePictures = await Promise.all(promises);
+        return profilePictures
+      
+      } catch (error) {
+        throw error;
+        
+      }
 
-    return profilePictures;
-    // while (currentDate <= endDateObj) {
-    //   const formattedDate = currentDate.toISOString().split('T')[0];
-
-    //   await database.execute('INSERT INTO number_days (day, trip_id) VALUES (?, ?)', [
-    //     formattedDate,
-    //     tripId,
-    //   ]);
-
-    //   currentDate.setDate(currentDate.getDate() + 1);
-    // }
-  } catch (error) {
-    throw error;
-  }
-  //   console.log("FINAL", pictures);
-};
+}
 
 const newPasswordChange = (hashedPassword, email) => {
-  // console.log(hashedPassword, email);
   return database
     .query("UPDATE users SET hashed_password=? WHERE email =?", [
       hashedPassword,
