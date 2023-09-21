@@ -46,7 +46,8 @@ CREATE TABLE articles(
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
-    image_url TEXT NOT NULL
+    image_url TEXT NOT NULL,
+    tips TEXT
 );
 
 CREATE TABLE places_to_visit(
